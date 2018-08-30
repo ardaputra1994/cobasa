@@ -11,27 +11,24 @@
 |
 */
 
-Route::get('/', function () {
-    return view('pages.homepage');
-});                           
+Route::get('/', 'PagesController@homepage');
+Route::get('about', 'PagesController@about');
+Route::get('siswa', 'SiswaController@index');
 
-Route::get('about', function() {
-	return view('pages.about');
-}); 
+Route::get('halaman_rahasia', [
+	'as' => 'secret',
+	'uses' => 'RahasiaController@halamaRahasia'
+]);
+Route::get('showmesecret', 'RahasiaController@showMeSecret');
+Route::get('siswa/create', 'SiswaController@create');
+Route::post('siswa', 'SiswaController@store');
 
-// Route::get('halaman_rahasia', ['as' => 'secret', function() {
-// 	return 'Anda sedang melihat <strong>Halaman Secret</strong>';
-// }]);
 
-Route::get('halaman_rahasia', function() {
-	return 'Anda sedang melihat <strong>Melihat halaman secret oy oy</strong>';
-})->name('secret');
+// Route::get('halaman_rahasia', function() {
+// 	return 'Anda sedang melihat <strong>Melihat halaman secret oy oy</strong>';
+// })->name('secret');
 
-Route::get('showsecretme', function() {
-	return redirect()->route('secret');
-});
+// Route::get('showsecretme', function() {
+// 	return redirect()->route('secret');
+// });
 
-Route::get('siswa', function() {
-	$siswa = ['Ronaldo', 'James', 'Ancelloti', 'Navas'];
-	return view('siswa.index', compact('siswa'));
-});
