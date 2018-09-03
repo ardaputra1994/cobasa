@@ -21,7 +21,5 @@
 @stop
 
 @section('footer')
-	<dir id="footer">
-		<p>&copy: 2018 Laravel APP Dev</p>
-	</dir>
+	@include('footer')
 @stop

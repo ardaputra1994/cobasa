@@ -15,8 +15,8 @@ class SiswaController extends Controller
     public function index()
     {
        $halaman = 'siswa';
-       $siswa_list = Siswa::all()->sortBy('tgl_lahir');
-       $jumah_siswa = $siswa_list->count();
+       $siswa_list = Siswa::orderBy('nama_siswa','asc')->paginate(10);
+       $jumah_siswa = Siswa::count();
        return view ('siswa.index', compact('halaman', 'siswa_list', 'jumah_siswa'));
     }
 
@@ -28,7 +28,8 @@ class SiswaController extends Controller
     public function create()
     {
         //
-        return view('siswa.create');
+        $halaman = 'siswa';
+        return view('siswa.create', compact('halaman'));
     }
 
     /**
@@ -40,8 +41,15 @@ class SiswaController extends Controller
     public function store(Request $request)
     {
         //
-        $siswa = $request->all();
-        return $siswa;
+        // $siswa = new \App\Siswa;
+        // $siswa->nisn          = $request->nisn;
+        // $siswa->nama_siswa    = $request->nama_siswa;
+        // $siswa->tgl_lahir     = $request->tgl_lahir;
+        // $siswa->jenis_kelamin = $request->jenis_kelamin;
+        // $siswa->save();
+        // return redirect('siswa');
+        Siswa::create($request->all());
+        return redirect('siswa');
     }
 
     /**
@@ -53,6 +61,9 @@ class SiswaController extends Controller
     public function show($id)
     {
         //
+        $halaman = 'siswa';
+        $siswa = Siswa::findOrFail($id);
+        return view('siswa.show', compact('halaman', 'siswa'));
     }
 
     /**
@@ -64,6 +75,8 @@ class SiswaController extends Controller
     public function edit($id)
     {
         //
+        $siswa  = Siswa::findOrFail($id);
+        return  view('siswa.edit', compact('siswa'));
     }
 
     /**
@@ -76,6 +89,9 @@ class SiswaController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $siswa = Siswa::findOrFail($id);
+        $siswa->update($request->all());
+        return  redirect('siswa');
     }
 
     /**
@@ -87,5 +103,8 @@ class SiswaController extends Controller
     public function destroy($id)
     {
         //
+        $siswa = Siswa::findOrFail($id);
+        $siswa->delete();
+        return redirect('siswa');
     }
 }
