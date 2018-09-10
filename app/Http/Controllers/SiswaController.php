@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Siswa;
+use Validator;
 
 class SiswaController extends Controller
 {
@@ -40,6 +41,23 @@ class SiswaController extends Controller
      */
     public function store(Request $request)
     {
+        
+        $input = $request->all();
+
+        $validator = Validator::make ($input, [
+            'nisn'  => 'required|string|size:4|unique:siswa,nisn',
+            'nama_siswa'   => 'required|string|max:30',
+            'tgl_lahir' => 'required|date',
+            'jenis_kelamin' => 'required|in:L,P',
+
+        ]);
+
+        if ($validator->fails())
+        {
+            return redirect('siswa/create')->withInput()->withErrors($validator);
+        }
+        Siswa::create($input);
+        return redirect('siswa');
         //
         // $siswa = new \App\Siswa;
         // $siswa->nisn          = $request->nisn;
@@ -48,8 +66,8 @@ class SiswaController extends Controller
         // $siswa->jenis_kelamin = $request->jenis_kelamin;
         // $siswa->save();
         // return redirect('siswa');
-        Siswa::create($request->all());
-        return redirect('siswa');
+        // Siswa::create($request->all());
+        // return redirect('siswa');
     }
 
     /**
@@ -107,4 +125,33 @@ class SiswaController extends Controller
         $siswa->delete();
         return redirect('siswa');
     }
+
+    public function tesCollection()
+    {
+   
+       $data = 
+       [
+            ['nisn' => '1001', 'nama_siswa' => 'Agus Yulianto'],
+            ['nisn' => '1002', 'nama_siswa' => 'Agu Yulianto'],
+            ['nisn' => '1003', 'nama_siswa' => 'Agus Yuli'],
+            ['nisn' => '1004', 'nama_siswa' => 'Agung Yulianto'],
+       ];
+       $koleksi = collect($data);
+       $koleksi->tojson();
+       return $koleksi;
+      
+        
+    }
+
+    public function dateMutator()
+    {
+        $siswa=Siswa::findOrFail(1);
+        $str = 'Tanggal Lahir :' . $siswa->tgl_lahir->format('d-m-Y') . '<br>' . 
+        'Ulang Tahun Saya : ' . '<strong>' . $siswa->tgl_lahir->addYears(30)->format('d-m-Y') .'</strong>';
+
+        return $str; 
+        
+    }
 }
+
+    

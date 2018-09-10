@@ -15,4 +15,13 @@ class Siswa extends Model
     	'tgl_lahir', 
     	'jenis_kelamin'
     ];
+    protected $dates = ['tgl_lahir'];
+
+    public function getNamaSiswaAttribute($nama_siswa)
+    {
+    	return ucwords($nama_siswa);
+    }
+
+    
+   
 }

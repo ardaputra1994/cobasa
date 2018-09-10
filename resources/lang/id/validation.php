@@ -68,7 +68,7 @@ return [
     'numeric'              => 'The :attribute must be a number.',
     'present'              => 'The :attribute field must be present.',
     'regex'                => 'The :attribute format is invalid.',
-    'required'             => 'Kolom :attribute harus diisi.',
+    'required'             => 'The :attribute field is required.',
     'required_if'          => 'The :attribute field is required when :other is :value.',
     'required_unless'      => 'The :attribute field is required unless :other is in :values.',
     'required_with'        => 'The :attribute field is required when :values is present.',
@@ -100,28 +100,9 @@ return [
     */
 
     'custom' => [
-        'nisn' => [
-            'required' => 'NISN harus diisi.',
-            'string' => 'NISN harus berupa string.',
-            'size' => 'NISN harus :size angka.',
-            'unique' => 'NISN sudah terpakai.',
+        'attribute-name' => [
+            'rule-name' => 'custom-message',
         ],
-
-        'nama_siswa' => [
-            'required' => 'Nama Siswa harus diisi.',
-            'string' => 'Nama Siswa harus berupa string.',
-            'max' => 'Nma Siswa tidak boleh lebih dari :max karakter.',
-        ],
-
-        'jenis_kelamin' => [
-            'required' => 'Gender harus diisi.',
-            'in' => 'Gender harus diisi L atau P.',            
-        ],
-
-        'tgl_lahir' => [
-            'required' => 'Tanggal Lahir harus diisi.',
-            'date' => 'Tangga Lahir haru diisi forma yang benar',
-          ],
     ],
 
     /*

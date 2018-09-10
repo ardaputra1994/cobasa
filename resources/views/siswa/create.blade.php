@@ -2,7 +2,8 @@
 
 @section('main')
 <div id="siswa">
-	<h2>Tambah Siswa</h2>		
+	<h2>Tambah Siswa</h2>
+		@include('errors.form_error_list')		
 		{!! Form::open(['url' => 'siswa']) !!}
 				@include('siswa.form', ['submitButtonText' => 'Tambah Siswa'])
 
@@ -49,6 +50,6 @@
 
 		<div class="form-group">
 			<input type="submit" value="Tambah Siswa" class="btn btn-primary form-control">
-		</div>
+		</div> 
 		
 	</form> -->
