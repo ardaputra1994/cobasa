@@ -13,6 +13,9 @@
 				<div class="form-group">
 					{!! Form::label('nama_siswa', 'Nama Siswa', ['class' => 'control-label']) !!}
 					{!! Form::text('nama_siswa', null, ['class' => 'form-control']) !!}
+					@if ($errors->has('nama_siswa'))
+						<span class="help-block">{{ $errors->first('nama_siswa') }}</span>
+				@endif
 				</div>
 				<div class="form-group">
 					{!! Form::label('tgl_lahir', 'Tanggal Lahir', ['class' => 'control-label']) !!}
