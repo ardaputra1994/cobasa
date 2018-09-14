@@ -10,6 +10,7 @@
 					<th>Nama</th>
 					<th>Tanggal</th>
 					<th>Gender</th>
+					<th>Telepon</th>
 					<th>Action</th>
 				</tr>
 			</thead>
@@ -20,6 +21,9 @@
 					<td>{{ $siswa->nama_siswa }}</td>
 					<td>{{ $siswa->tgl_lahir->format('d-m-Y') }}</td>
 					<td>{{ $siswa->jenis_kelamin }}</td>
+					<td>
+						{{ !empty($siswa->telepon->no_telepon) ? $siswa->telepon->no_telepon : '-'  }}
+					</td>
 					<td>
 						<div class="box-button">
 							{{ link_to('siswa/' . $siswa->id, 'Detail', ['class' => 'btn btn-success btn-sm']) }}
@@ -33,6 +37,7 @@
 							{!! Form::close() !!}
 						</div>							
 					</td>
+					
 
 				</tr>
 				<?php endforeach ?>

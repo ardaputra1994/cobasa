@@ -22,6 +22,11 @@ class Siswa extends Model
     	return ucwords($nama_siswa);
     }
 
+    public function telepon()
+    {
+        return $this->hasOne('App\Telepon', 'id_siswa');
+    }
+
     
    
 }

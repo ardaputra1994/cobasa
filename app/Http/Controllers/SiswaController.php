@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Siswa;
+use App\Telepon;
 use Validator;
+
 
 class SiswaController extends Controller
 {
@@ -49,6 +51,7 @@ class SiswaController extends Controller
             'nama_siswa'   => 'required|string|max:30',
             'tgl_lahir' => 'required|date',
             'jenis_kelamin' => 'required|in:L,P',
+            'no_telepon' => 'sometimes|numeric|digits_between:10,15|unique:telepon,no_telepon',
 
         ]);
 
@@ -56,18 +59,14 @@ class SiswaController extends Controller
         {
             return redirect('siswa/create')->withInput()->withErrors($validator);
         }
-        Siswa::create($input);
+        $siswa = Siswa::create($input);
+        $telepon = new Telepon();
+        $telepon->no_telepon = $request->input('no_telepon');
+        $siswa->telepon()->save($telepon);    
+
+
         return redirect('siswa');
-        //
-        // $siswa = new \App\Siswa;
-        // $siswa->nisn          = $request->nisn;
-        // $siswa->nama_siswa    = $request->nama_siswa;
-        // $siswa->tgl_lahir     = $request->tgl_lahir;
-        // $siswa->jenis_kelamin = $request->jenis_kelamin;
-        // $siswa->save();
-        // return redirect('siswa');
-        // Siswa::create($request->all());
-        // return redirect('siswa');
+       
     }
 
     /**
@@ -110,21 +109,20 @@ class SiswaController extends Controller
         $siswa = Siswa::findOrFail($id);
         $input = $request->all();
         $validator = Validator::make($input, [
-            'nisn'  => 'required|string|size:4|unique:siswa,nisn,' . $request->input('id'),
+            // 'nisn'  => 'required|string|size:4|unique:siswa,nisn,' . $request->input('id'),
             'nama_siswa'  => 'required|string|max:30',
             'tgl_lahir' =>  'required|date',
             'jenis_kelamin' => 'required|in:L,P',  
         ]);
 
-        @if ($validator->fails()) {
+        if ($validator->fails()) {
             return redirect('siswa/' . $id . '/edit')->withInput()->withErrors($validator);
         }       
 
-        else 
-        {
+       
             $siswa->update($request->all());
         return  redirect('siswa');    
-        }
+        
         
     }
 
