@@ -142,32 +142,7 @@ class SiswaController extends Controller
         return redirect('siswa');
     }
 
-    public function tesCollection()
-    {
-   
-       $data = 
-       [
-            ['nisn' => '1001', 'nama_siswa' => 'Agus Yulianto'],
-            ['nisn' => '1002', 'nama_siswa' => 'Agu Yulianto'],
-            ['nisn' => '1003', 'nama_siswa' => 'Agus Yuli'],
-            ['nisn' => '1004', 'nama_siswa' => 'Agung Yulianto'],
-       ];
-       $koleksi = collect($data);
-       $koleksi->tojson();
-       return $koleksi;
-      
-        
-    }
-
-    public function dateMutator()
-    {
-        $siswa=Siswa::findOrFail(1);
-        $str = 'Tanggal Lahir :' . $siswa->tgl_lahir->format('d-m-Y') . '<br>' . 
-        'Ulang Tahun Saya : ' . '<strong>' . $siswa->tgl_lahir->addYears(30)->format('d-m-Y') .'</strong>';
-
-        return $str; 
-        
-    }
+    
 }
 
     

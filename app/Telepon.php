@@ -17,6 +17,6 @@ class Telepon extends Model
 
     public function siswa()
     {
-    	return $this->hasOne('App\Siswa', 'id');
+    	return $this->belongsTo('App\Siswa','id');
     }
 }
