@@ -56,6 +56,22 @@
 			@endif
 	</div>				
 <!-- End Form Jenis Kelamin -->
+
+<!-- Form Nomor Telepon -->
+@if ($errors->any())
+	<div class="form-group {{ $errors->has('no_telepon') ? 'has-error' : 'has-success' }}">
+@else
+	<div class="form-group">
+@endif
+	{!! Form::label('no_telepon', 'Telepon', ['class' => 'control-label']) !!}
+	{!! Form::text('no_telepon', null, ['class' => 'form-control']) !!}
+
+@if ($errors->has('no_telepon'))
+	<span class="help-block">{{ $errors->first('no_telepon') }}</span>
+@endif
+	</div>
+<!-- End Form Nomor Telepon -->
+
 				<div class="form-group">
 						{!! Form::submit('Update',['class' => 'btn btn-primary form-control']) !!}
 

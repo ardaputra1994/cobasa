@@ -8,15 +8,15 @@ class Telepon extends Model
 {
     //
     protected $table = 'telepon';
-    protected $primarykey = 'id_siswa';
+    protected $primaryKey = 'id_siswa';
 
     protected $fillable = [
     	'id_siswa',
-    	'nomor_telepon',	
+    	'no_telepon',	
     ];
 
     public function siswa()
     {
-    	return $this->belongsTo('App\Siswa', 'id_siswa');
+    	return $this->hasOne('App\Siswa', 'id');
     }
 }

@@ -92,7 +92,8 @@ class SiswaController extends Controller
     public function edit($id)
     {
         //
-        $siswa  = Siswa::findOrFail($id);
+        $siswa  = Siswa::findOrFail($id);     
+        $siswa->no_telepon = $siswa->telepon->no_telepon;
         return  view('siswa.edit', compact('siswa'));
     }
 
@@ -112,18 +113,19 @@ class SiswaController extends Controller
             // 'nisn'  => 'required|string|size:4|unique:siswa,nisn,' . $request->input('id'),
             'nama_siswa'  => 'required|string|max:30',
             'tgl_lahir' =>  'required|date',
-            'jenis_kelamin' => 'required|in:L,P',  
+            'jenis_kelamin' => 'required|in:L,P', 
+            'no_telepon' => 'sometimes|numeric|digits_between:10,15|unique:telepon,no_telepon,' . $request->input('id') . ',id_siswa', 
         ]);
 
         if ($validator->fails()) {
             return redirect('siswa/' . $id . '/edit')->withInput()->withErrors($validator);
         }       
 
-       
-            $siswa->update($request->all());
-        return  redirect('siswa');    
-        
-        
+        $siswa->update($request->all());
+        $telepon = $siswa->telepon;
+        $telepon->no_telepon = $request->input('no_telepon');
+        $siswa->telepon()->save($telepon);
+        return  redirect('siswa');        
     }
 
     /**

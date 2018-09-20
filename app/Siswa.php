@@ -24,7 +24,7 @@ class Siswa extends Model
 
     public function telepon()
     {
-        return $this->hasOne('App\Telepon', 'id_siswa');
+        return $this->hasOne('App\Telepon','id_siswa');
     }
 
     
