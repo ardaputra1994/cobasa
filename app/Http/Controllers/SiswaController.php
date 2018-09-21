@@ -114,7 +114,7 @@ class SiswaController extends Controller
         $siswa = Siswa::findOrFail($id);
         $input = $request->all();
         $validator = Validator::make($input, [
-            // 'nisn'  => 'required|string|size:4|unique:siswa,nisn,' . $request->input('id'),
+             'nisn'  => 'required|string|size:4|unique:siswa,nisn,' . $request->input('id'),
             'nama_siswa'  => 'required|string|max:30',
             'tgl_lahir' =>  'required|date',
             'jenis_kelamin' => 'required|in:L,P', 
