@@ -92,8 +92,12 @@ class SiswaController extends Controller
     public function edit($id)
     {
         //
-        $siswa  = Siswa::findOrFail($id);     
-        $siswa->no_telepon = $siswa->telepon->no_telepon;
+
+        $siswa  = Siswa::findOrFail($id);
+        if ($siswa->telepon)
+        {
+            $siswa->no_telepon = $siswa->telepon->no_telepon;
+        }     
         return  view('siswa.edit', compact('siswa'));
     }
 
