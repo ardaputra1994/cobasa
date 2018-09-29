@@ -113,6 +113,11 @@ return [
             'max' => 'Nma Siswa tidak boleh lebih dari :max karakter.',
         ],
 
+        'id_kelas' => [
+            'required' => 'Id Kelas Harus Diisi',
+        ],
+
+
         'jenis_kelamin' => [
             'required' => 'Gender harus diisi.',
             'in' => 'Gender harus diisi L atau P.',            

@@ -8,6 +8,7 @@
 				<tr>
 					<th>NISN</th>
 					<th>Nama</th>
+					<th>Kelas</th>
 					<th>Tanggal</th>
 					<th>Gender</th>
 					<th>Telepon</th>
@@ -19,6 +20,7 @@
 				<tr>
 					<td>{{ $siswa->nisn }}</td>
 					<td>{{ $siswa->nama_siswa }}</td>
+					<td>{{ $siswa->kelas->nama_kelas }}</td>
 					<td>{{ $siswa->tgl_lahir->format('d-m-Y') }}</td>
 					<td>{{ $siswa->jenis_kelamin }}</td>
 					<td>
