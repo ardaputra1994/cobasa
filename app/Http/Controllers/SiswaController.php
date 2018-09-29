@@ -126,7 +126,7 @@ class SiswaController extends Controller
             'tgl_lahir' =>  'required|date',
             'jenis_kelamin' => 'required|in:L,P', 
             'no_telepon' => 'sometimes|numeric|digits_between:10,15|unique:telepon,no_telepon,' . $request->input('id') . ',id_siswa', 
-            'id_kelas' => 'required',
+            //'id_kelas' => 'required',
         ]);
 
         if ($validator->fails()) {
