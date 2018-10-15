@@ -21,11 +21,10 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(Router $router)
     {
-        //
-
-        parent::boot();
+        parent::boot($router);
+        $router->model('siswa', 'App\Siswa');
     }
 
     /**
@@ -33,11 +32,15 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function map()
+    public function map(Router $router)
     {
-        $this->mapApiRoutes();
+        $this->group(['namespace' => $this->namespacex],
+            function ($router)
+            {
+                require app_path('');
 
-        $this->mapWebRoutes();
+            }
+        );
 
         //
     }

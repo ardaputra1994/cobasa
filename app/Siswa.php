@@ -31,7 +31,13 @@ class Siswa extends Model
     {
         return $this->belongsTo('App\Kelas','id_kelas');
     }
-
-    
+    public function hobi()
+    {
+        return $this->belongsToMany('App\Hobi', 'hobi_siswa', 'id_siswa', 'id_hobi' )->withTimeStamps();
+    } 
+    public function getHobiSiswaAttribute()
+    {
+        return $this->hobi->pluck('id')->toArray();
+    }   
    
 }
